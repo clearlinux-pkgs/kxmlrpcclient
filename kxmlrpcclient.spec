@@ -5,18 +5,18 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kxmlrpcclient
-Version  : 5.50.0
-Release  : 3
-URL      : https://download.kde.org/stable/frameworks/5.50/kxmlrpcclient-5.50.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.50/kxmlrpcclient-5.50.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.50/kxmlrpcclient-5.50.0.tar.xz.sig
+Version  : 5.51.0
+Release  : 4
+URL      : https://download.kde.org/stable/frameworks/5.51/kxmlrpcclient-5.51.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.51/kxmlrpcclient-5.51.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.51/kxmlrpcclient-5.51.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause LGPL-2.1
-Requires: kxmlrpcclient-lib
-Requires: kxmlrpcclient-license
-Requires: kxmlrpcclient-locales
-Requires: kxmlrpcclient-data
+Requires: kxmlrpcclient-data = %{version}-%{release}
+Requires: kxmlrpcclient-lib = %{version}-%{release}
+Requires: kxmlrpcclient-license = %{version}-%{release}
+Requires: kxmlrpcclient-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 
@@ -40,9 +40,9 @@ data components for the kxmlrpcclient package.
 %package dev
 Summary: dev components for the kxmlrpcclient package.
 Group: Development
-Requires: kxmlrpcclient-lib
-Requires: kxmlrpcclient-data
-Provides: kxmlrpcclient-devel
+Requires: kxmlrpcclient-lib = %{version}-%{release}
+Requires: kxmlrpcclient-data = %{version}-%{release}
+Provides: kxmlrpcclient-devel = %{version}-%{release}
 
 %description dev
 dev components for the kxmlrpcclient package.
@@ -51,8 +51,8 @@ dev components for the kxmlrpcclient package.
 %package lib
 Summary: lib components for the kxmlrpcclient package.
 Group: Libraries
-Requires: kxmlrpcclient-data
-Requires: kxmlrpcclient-license
+Requires: kxmlrpcclient-data = %{version}-%{release}
+Requires: kxmlrpcclient-license = %{version}-%{release}
 
 %description lib
 lib components for the kxmlrpcclient package.
@@ -75,26 +75,26 @@ locales components for the kxmlrpcclient package.
 
 
 %prep
-%setup -q -n kxmlrpcclient-5.50.0
+%setup -q -n kxmlrpcclient-5.51.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536436919
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1539641717
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
-make  %{?_smp_mflags}
+make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1536436919
+export SOURCE_DATE_EPOCH=1539641717
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/kxmlrpcclient
-cp COPYING.BSD %{buildroot}/usr/share/doc/kxmlrpcclient/COPYING.BSD
-cp COPYING.LIB %{buildroot}/usr/share/doc/kxmlrpcclient/COPYING.LIB
+mkdir -p %{buildroot}/usr/share/package-licenses/kxmlrpcclient
+cp COPYING.BSD %{buildroot}/usr/share/package-licenses/kxmlrpcclient/COPYING.BSD
+cp COPYING.LIB %{buildroot}/usr/share/package-licenses/kxmlrpcclient/COPYING.LIB
 pushd clr-build
 %make_install
 popd
@@ -124,12 +124,12 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5XmlRpcClient.so.5
-/usr/lib64/libKF5XmlRpcClient.so.5.50.0
+/usr/lib64/libKF5XmlRpcClient.so.5.51.0
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/kxmlrpcclient/COPYING.BSD
-/usr/share/doc/kxmlrpcclient/COPYING.LIB
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/kxmlrpcclient/COPYING.BSD
+/usr/share/package-licenses/kxmlrpcclient/COPYING.LIB
 
 %files locales -f libkxmlrpcclient5.lang
 %defattr(-,root,root,-)
