@@ -6,7 +6,7 @@
 #
 Name     : kxmlrpcclient
 Version  : 5.52.0
-Release  : 5
+Release  : 6
 URL      : https://download.kde.org/stable/frameworks/5.52/kxmlrpcclient-5.52.0.tar.xz
 Source0  : https://download.kde.org/stable/frameworks/5.52/kxmlrpcclient-5.52.0.tar.xz
 Source99 : https://download.kde.org/stable/frameworks/5.52/kxmlrpcclient-5.52.0.tar.xz.sig
@@ -28,14 +28,6 @@ This library contains simple XML-RPC Client support. It is a complete
 client and is quite easy to use. Only one interface is exposed to the
 world, kxmlrpcclient/client.h and of that interface, you only need to
 use 3 methods: setUrl, setUserAgent and call.
-
-%package abi
-Summary: abi components for the kxmlrpcclient package.
-Group: Default
-
-%description abi
-abi components for the kxmlrpcclient package.
-
 
 %package data
 Summary: data components for the kxmlrpcclient package.
@@ -90,7 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541879700
+export SOURCE_DATE_EPOCH=1542746576
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -98,7 +90,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1541879700
+export SOURCE_DATE_EPOCH=1542746576
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kxmlrpcclient
 cp COPYING.BSD %{buildroot}/usr/share/package-licenses/kxmlrpcclient/COPYING.BSD
@@ -110,10 +102,6 @@ popd
 
 %files
 %defattr(-,root,root,-)
-
-%files abi
-%defattr(-,root,root,-)
-/usr/share/abi/libKF5XmlRpcClient.so.5.52.0.abi
 
 %files data
 %defattr(-,root,root,-)
