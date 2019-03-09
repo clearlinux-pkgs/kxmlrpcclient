@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kxmlrpcclient
-Version  : 5.55.0
-Release  : 10
-URL      : https://download.kde.org/stable/frameworks/5.55/kxmlrpcclient-5.55.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.55/kxmlrpcclient-5.55.0.tar.xz
-Source99 : https://download.kde.org/stable/frameworks/5.55/kxmlrpcclient-5.55.0.tar.xz.sig
-Summary  : No detailed summary available
+Version  : 5.56.0
+Release  : 11
+URL      : https://download.kde.org/stable/frameworks/5.56/kxmlrpcclient-5.56.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.56/kxmlrpcclient-5.56.0.tar.xz
+Source99 : https://download.kde.org/stable/frameworks/5.56/kxmlrpcclient-5.56.0.tar.xz.sig
+Summary  : XML-RPC client library for KDE
 Group    : Development/Tools
 License  : BSD-2-Clause LGPL-2.1
 Requires: kxmlrpcclient-data = %{version}-%{release}
@@ -43,6 +43,7 @@ Group: Development
 Requires: kxmlrpcclient-lib = %{version}-%{release}
 Requires: kxmlrpcclient-data = %{version}-%{release}
 Provides: kxmlrpcclient-devel = %{version}-%{release}
+Requires: kxmlrpcclient = %{version}-%{release}
 
 %description dev
 dev components for the kxmlrpcclient package.
@@ -75,22 +76,23 @@ locales components for the kxmlrpcclient package.
 
 
 %prep
-%setup -q -n kxmlrpcclient-5.55.0
+%setup -q -n kxmlrpcclient-5.56.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549765211
+export SOURCE_DATE_EPOCH=1552170063
 mkdir -p clr-build
 pushd clr-build
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %cmake ..
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1549765211
+export SOURCE_DATE_EPOCH=1552170063
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kxmlrpcclient
 cp COPYING.BSD %{buildroot}/usr/share/package-licenses/kxmlrpcclient/COPYING.BSD
@@ -124,7 +126,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5XmlRpcClient.so.5
-/usr/lib64/libKF5XmlRpcClient.so.5.55.0
+/usr/lib64/libKF5XmlRpcClient.so.5.56.0
 
 %files license
 %defattr(0644,root,root,0755)
