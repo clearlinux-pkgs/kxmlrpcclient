@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kxmlrpcclient
-Version  : 5.69.0
-Release  : 26
-URL      : https://download.kde.org/stable/frameworks/5.69/kxmlrpcclient-5.69.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.69/kxmlrpcclient-5.69.0.tar.xz
-Source1  : https://download.kde.org/stable/frameworks/5.69/kxmlrpcclient-5.69.0.tar.xz.sig
+Version  : 5.70.0
+Release  : 27
+URL      : https://download.kde.org/stable/frameworks/5.70/kxmlrpcclient-5.70.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.70/kxmlrpcclient-5.70.0.tar.xz
+Source1  : https://download.kde.org/stable/frameworks/5.70/kxmlrpcclient-5.70.0.tar.xz.sig
 Summary  : XML-RPC client library for KDE
 Group    : Development/Tools
 License  : BSD-2-Clause LGPL-2.1
@@ -19,6 +19,10 @@ Requires: kxmlrpcclient-license = %{version}-%{release}
 Requires: kxmlrpcclient-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : extra-cmake-modules-data
+BuildRequires : ki18n-dev
+BuildRequires : kio-dev
+BuildRequires : qtbase-dev
 
 %description
 # KXmlRpcClient
@@ -43,7 +47,6 @@ Group: Development
 Requires: kxmlrpcclient-lib = %{version}-%{release}
 Requires: kxmlrpcclient-data = %{version}-%{release}
 Provides: kxmlrpcclient-devel = %{version}-%{release}
-Requires: kxmlrpcclient = %{version}-%{release}
 Requires: kxmlrpcclient = %{version}-%{release}
 
 %description dev
@@ -77,36 +80,35 @@ locales components for the kxmlrpcclient package.
 
 
 %prep
-%setup -q -n kxmlrpcclient-5.69.0
-cd %{_builddir}/kxmlrpcclient-5.69.0
+%setup -q -n kxmlrpcclient-5.70.0
+cd %{_builddir}/kxmlrpcclient-5.70.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1586901463
+export SOURCE_DATE_EPOCH=1589228725
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
 make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1586901463
+export SOURCE_DATE_EPOCH=1589228725
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kxmlrpcclient
-cp %{_builddir}/kxmlrpcclient-5.69.0/COPYING.BSD %{buildroot}/usr/share/package-licenses/kxmlrpcclient/d0f83c8198fdd5464d2373015b7b64ce7cae607e
-cp %{_builddir}/kxmlrpcclient-5.69.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kxmlrpcclient/01a6b4bf79aca9b556822601186afab86e8c4fbf
+cp %{_builddir}/kxmlrpcclient-5.70.0/COPYING.BSD %{buildroot}/usr/share/package-licenses/kxmlrpcclient/d0f83c8198fdd5464d2373015b7b64ce7cae607e
+cp %{_builddir}/kxmlrpcclient-5.70.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kxmlrpcclient/01a6b4bf79aca9b556822601186afab86e8c4fbf
 pushd clr-build
 %make_install
 popd
@@ -136,7 +138,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5XmlRpcClient.so.5
-/usr/lib64/libKF5XmlRpcClient.so.5.69.0
+/usr/lib64/libKF5XmlRpcClient.so.5.70.0
 
 %files license
 %defattr(0644,root,root,0755)
