@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x58D0EE648A48B3BB (faure@kde.org)
 #
 Name     : kxmlrpcclient
-Version  : 5.75.0
-Release  : 30
-URL      : https://download.kde.org/stable/frameworks/5.75/portingAids/kxmlrpcclient-5.75.0.tar.xz
-Source0  : https://download.kde.org/stable/frameworks/5.75/portingAids/kxmlrpcclient-5.75.0.tar.xz
-Source1  : https://download.kde.org/stable/frameworks/5.75/portingAids/kxmlrpcclient-5.75.0.tar.xz.sig
+Version  : 5.76.0
+Release  : 31
+URL      : https://download.kde.org/stable/frameworks/5.76/portingAids/kxmlrpcclient-5.76.0.tar.xz
+Source0  : https://download.kde.org/stable/frameworks/5.76/portingAids/kxmlrpcclient-5.76.0.tar.xz
+Source1  : https://download.kde.org/stable/frameworks/5.76/portingAids/kxmlrpcclient-5.76.0.tar.xz.sig
 Summary  : XML-RPC client library for KDE
 Group    : Development/Tools
 License  : BSD-2-Clause LGPL-2.0
@@ -80,15 +80,15 @@ locales components for the kxmlrpcclient package.
 
 
 %prep
-%setup -q -n kxmlrpcclient-5.75.0
-cd %{_builddir}/kxmlrpcclient-5.75.0
+%setup -q -n kxmlrpcclient-5.76.0
+cd %{_builddir}/kxmlrpcclient-5.76.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1602690770
+export SOURCE_DATE_EPOCH=1605430234
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -104,11 +104,11 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1602690770
+export SOURCE_DATE_EPOCH=1605430234
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kxmlrpcclient
-cp %{_builddir}/kxmlrpcclient-5.75.0/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/kxmlrpcclient/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
-cp %{_builddir}/kxmlrpcclient-5.75.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kxmlrpcclient/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/kxmlrpcclient-5.76.0/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/kxmlrpcclient/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
+cp %{_builddir}/kxmlrpcclient-5.76.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/kxmlrpcclient/20079e8f79713dce80ab09774505773c926afa2a
 pushd clr-build
 %make_install
 popd
@@ -138,7 +138,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5XmlRpcClient.so.5
-/usr/lib64/libKF5XmlRpcClient.so.5.75.0
+/usr/lib64/libKF5XmlRpcClient.so.5.76.0
 
 %files license
 %defattr(0644,root,root,0755)
